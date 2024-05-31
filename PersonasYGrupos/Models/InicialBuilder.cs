@@ -1,13 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using PersonasYGrupos.Services;
+using PersonasYGrupos.Services.Filtros;
 
 namespace PersonasYGrupos.Models
 {
     internal class InicialBuilder : IListaBuilder
     {
+        private readonly IValidadorEmp Validador;
+        public InicialBuilder(IValidadorEmp validador)
+        {
+            if (validador != null)
+            {
+                Validador = validador;
+            }
+            else
+            {
+                Validador = new TodosValidador();
+            }
+        }
         public List<Employee> dameEmpleados()
         {
             List<Employee> empList = new List<Employee>();
@@ -101,7 +116,8 @@ namespace PersonasYGrupos.Models
                 DOB = DateTime.Parse("01/11/1978"),
                 Sex = 'M'
             });
-            return empList;
+            return empList.Where(x=>Validador.isValid(x)).ToList();
+
         }
     }
 }

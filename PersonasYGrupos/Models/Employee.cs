@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PersonasYGrupos.Models
+﻿namespace PersonasYGrupos.Models
 {
     public class Employee
     {
@@ -14,5 +8,10 @@ namespace PersonasYGrupos.Models
         public string LName { get; set; }
         public DateTime DOB { get; set; }
         public char Sex { get; set; }
+
+        public override string ToString()
+        {
+            return $"ID: {ID} FName: {FName} LName: {LName} DOB: {DOB} Sex: {Sex}";
+        }
     }
 }
